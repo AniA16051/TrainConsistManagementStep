@@ -1,13 +1,22 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.LinkedHashSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
+import java.util.*;
 
-public class TrainConsistMgmtApp {
+class TrainConsistMgmtApp {
+
+    // UC7: Inner class to model passenger bogie objects
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+
+        @Override
+        public String toString() {
+            return name + " -> " + capacity;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -114,7 +123,31 @@ public class TrainConsistMgmtApp {
         for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+        System.out.println("\nUC6 bogie-capacity mapping completed...\n");
 
-        System.out.println("\nUC6 bogie-capacity mapping completed...");
+        System.out.println("========================================");
+        System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
+        System.out.println("========================================\n");
+
+        List<Bogie> bogieObjects = new ArrayList<>();
+        bogieObjects.add(new Bogie("Sleeper", 72));
+        bogieObjects.add(new Bogie("AC Chair", 56));
+        bogieObjects.add(new Bogie("First Class", 24));
+        bogieObjects.add(new Bogie("General", 90));
+
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogieObjects) {
+            System.out.println(b);
+        }
+
+        // Using Comparator to sort by capacity
+        bogieObjects.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("\nAfter Sorting by Capacity:");
+        for (Bogie b : bogieObjects) {
+            System.out.println(b);
+        }
+
+        System.out.println("\nUC7 sorting completed...");
     }
 }
